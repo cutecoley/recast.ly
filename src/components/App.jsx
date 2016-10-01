@@ -25,6 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.defaultSearch = _.debounce(this.defaultSearch, 500);
     this.defaultSearch();
   }
 
