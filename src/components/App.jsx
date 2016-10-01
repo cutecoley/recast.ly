@@ -8,7 +8,6 @@ class App extends React.Component {
   }
 
   OnVideoListClick(event) {
-
     var title = event.currentTarget.textContent;
     //could fail for 2 videos with same name
     var video = this.state.videos.filter(video => video.snippet.title === title)[0];
@@ -18,29 +17,21 @@ class App extends React.Component {
   }
 
   onSearchInput(event) {
-    var options = {
-      query: event.currentTarget.value,
-      max: 10,
-      key: 'AIzaSyAzKijgBNBj-Y6i5ZYRpTdWgpaiASt-7SY'
-    };
-    var cb = videos => this.setState({videos: videos});
-    this.props.searchYouTube(options, cb);    
+    this.defaultSearch({query: event.currentTarget.value}); 
+  }
+  
+  onSearchClick(event) {
+    this.defaultSearch({query: event.currentTarget.previousSibling.value}); 
   }
 
   componentDidMount() {
-    var options = {
-      query: 'dogs',
-      max: 10,
-      key: 'AIzaSyAzKijgBNBj-Y6i5ZYRpTdWgpaiASt-7SY'
-    };
-    var cb = videos => this.setState({videos: videos});
-    this.props.searchYouTube(options, cb);
+    this.defaultSearch();
   }
 
   render() {
     return (
       <div>
-        <Nav onSearchInput={this.onSearchInput.bind(this)}/>
+        <Nav onSearchInput={this.onSearchInput.bind(this)} onSearchClick={this.onSearchClick.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
@@ -49,6 +40,15 @@ class App extends React.Component {
         </div>
       </div>
     );  
+  }
+
+  defaultSearch(options, cb) {
+    options = options || {};
+    options.query = options.query || 'React';
+    options.max = options.max || 10;
+    options.key = options.key || window.YOUTUBE_API_KEY;
+    cb = cb || (videos => this.setState({videos: videos}));
+    this.props.searchYouTube(options, cb);
   }
 }
 

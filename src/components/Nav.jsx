@@ -1,7 +1,7 @@
 var Nav = (props) => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search onSearchInput={props.onSearchInput}/>
+      <Search onSearchInput={props.onSearchInput} onSearchClick={props.onSearchClick}/>
     </div>
   </nav>
 );
