@@ -9,7 +9,7 @@ class App extends React.Component {
 
   OnVideoListClick(event) {
 
-    var title = $(event.currentTarget).text();
+    var title = event.currentTarget.textContent;
     //could fail for 2 videos with same name
     var video = this.state.videos.filter(video => video.snippet.title === title)[0];
     this.setState({
