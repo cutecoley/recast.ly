@@ -17,14 +17,14 @@ class App extends React.Component {
     });
   }
 
-  ComponentDidMount() {
+  componentDidMount() {
     var options = {
       query: 'react',
       max: 10,
       key: 'AIzaSyAzKijgBNBj-Y6i5ZYRpTdWgpaiASt-7SY'
     };
     var cb = videos => this.setState({videos: videos});
-    this.props.searchYoutube(options, cb);
+    this.props.searchYouTube(options, cb);
   }
 
   render() {
