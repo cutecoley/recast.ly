@@ -17,9 +17,19 @@ class App extends React.Component {
     });
   }
 
+  onSearchInput(event) {
+    var options = {
+      query: event.currentTarget.value,
+      max: 10,
+      key: 'AIzaSyAzKijgBNBj-Y6i5ZYRpTdWgpaiASt-7SY'
+    };
+    var cb = videos => this.setState({videos: videos});
+    this.props.searchYouTube(options, cb);    
+  }
+
   componentDidMount() {
     var options = {
-      query: 'react',
+      query: 'dogs',
       max: 10,
       key: 'AIzaSyAzKijgBNBj-Y6i5ZYRpTdWgpaiASt-7SY'
     };
@@ -30,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav onSearchInput={this.onSearchInput.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
